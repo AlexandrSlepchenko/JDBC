@@ -15,7 +15,6 @@ public class TestSpeedSolution {
     private static final String testSelectByIdPerformanceRequest = "SELECT * FROM TEST_SPEED WHERE TEST_SPEED.ID = ?";
     private static final String testSelectPerformanceRequest = "SELECT * FROM TEST_SPEED";
 
-    //171272
     public long testSavePerformance() {
         try (Connection connection = getConnection()) {
 
@@ -46,7 +45,6 @@ public class TestSpeedSolution {
         return -1;
     }
 
-    //171456
     public long testDeleteByIdPerformance() {
         try (Connection connection = getConnection()) {
 
@@ -71,7 +69,6 @@ public class TestSpeedSolution {
         return -1;
     }
 
-    //227
     public long testDeletePerformance() {
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement()) {
@@ -91,7 +88,6 @@ public class TestSpeedSolution {
         return -1;
     }
 
-    //171560
     public long testSelectByIdPerformance() {
         try (Connection connection = getConnection()) {
 
@@ -116,7 +112,6 @@ public class TestSpeedSolution {
         return -1;
     }
 
-    //250
     public long testSelectPerformance() {
         try (Connection connection = getConnection();
              Statement statement = connection.createStatement()) {
