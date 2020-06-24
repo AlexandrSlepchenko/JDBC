@@ -1,7 +1,6 @@
-package Lesson2;
+package jdbc.Lesson2;
 
 import java.sql.*;
-import java.util.Date;
 
 public class JDBCExamples {
 

@@ -1,4 +1,4 @@
-package Lesson2;
+package jdbc.Lesson3;
 
 public class Product {
     private long id;

@@ -1,4 +1,4 @@
-package Lesson3;
+package jdbc.Lesson3;
 
 public class TestSpeed {
     private long id;

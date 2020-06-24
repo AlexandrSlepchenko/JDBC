@@ -1,6 +1,6 @@
-package Lesson4;
+package jdbc.Lesson4;
 
-import Lesson3.Product;
+import jdbc.Lesson3.Product;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package Lesson4.HW;
+package jdbc.Lesson4.HW;
 
 public class Service {
     private static StorageDAO storageDAO = new StorageDAO();

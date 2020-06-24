@@ -1,4 +1,4 @@
-package Lesson4.HW;
+package jdbc.Lesson4.HW;
 
 import java.sql.*;
 

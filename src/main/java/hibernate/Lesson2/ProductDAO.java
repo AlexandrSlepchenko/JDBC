@@ -1,18 +1,18 @@
-package Lesson5;
+package hibernate.Lesson2;
 
+import hibernate.Lesson1.Product;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-public class ProductDAO {
+import java.util.List;
 
+public class ProductDAO {
     protected Product save(Product product) {
-        Session session;
         Transaction tr = null;
-        try {
-            session = createSessionFactory().openSession();
+        try (Session session = createSessionFactory().openSession()) {
             tr = session.getTransaction();
             tr.begin();
             session.save(product);
@@ -28,11 +28,31 @@ public class ProductDAO {
         return product;
     }
 
-    protected Product update(Product product) {
-        Session session;
+    public void saveProducts(List<Product> products){
         Transaction tr = null;
-        try {
-            session = createSessionFactory().openSession();
+        try (Session session = createSessionFactory().openSession()) {
+            tr = session.getTransaction();
+            tr.begin();
+
+            for (Product product : products) {
+                session.save(product);
+            }
+
+            tr.commit();
+        } catch (HibernateException e) {
+            System.err.println("Save is failed");
+            System.err.println(e.getMessage());
+
+            if (tr != null) {
+                tr.rollback();
+            }
+        }
+    }
+
+
+    protected Product update(Product product) {
+        Transaction tr = null;
+        try (Session session = createSessionFactory().openSession()) {
             tr = session.getTransaction();
             tr.begin();
             session.update(product);
@@ -49,10 +69,8 @@ public class ProductDAO {
     }
 
     protected void delete(long id) {
-        Session session;
         Transaction tr = null;
-        try {
-            session = createSessionFactory().openSession();
+        try (Session session = createSessionFactory().openSession()) {
             tr = session.getTransaction();
             tr.begin();
             session.delete(session.get(Product.class, id));

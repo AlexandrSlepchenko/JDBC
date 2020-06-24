@@ -1,4 +1,4 @@
-package Lesson2;
+package jdbc.Lesson2;
 
 import java.util.Date;
 
