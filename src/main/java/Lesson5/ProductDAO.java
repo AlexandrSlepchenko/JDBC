@@ -9,7 +9,7 @@ import org.hibernate.cfg.Configuration;
 public class ProductDAO {
 
     protected Product save(Product product) {
-        Session session = null;
+        Session session;
         Transaction tr = null;
         try {
             session = createSessionFactory().openSession();
@@ -29,7 +29,7 @@ public class ProductDAO {
     }
 
     protected Product update(Product product) {
-        Session session = null;
+        Session session;
         Transaction tr = null;
         try {
             session = createSessionFactory().openSession();
@@ -49,7 +49,7 @@ public class ProductDAO {
     }
 
     protected void delete(long id) {
-        Session session = null;
+        Session session;
         Transaction tr = null;
         try {
             session = createSessionFactory().openSession();
