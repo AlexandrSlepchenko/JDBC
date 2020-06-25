@@ -28,28 +28,6 @@ public class ProductDAO {
         return product;
     }
 
-    public void saveProducts(List<Product> products){
-        Transaction tr = null;
-        try (Session session = createSessionFactory().openSession()) {
-            tr = session.getTransaction();
-            tr.begin();
-
-            for (Product product : products) {
-                session.save(product);
-            }
-
-            tr.commit();
-        } catch (HibernateException e) {
-            System.err.println("Save is failed");
-            System.err.println(e.getMessage());
-
-            if (tr != null) {
-                tr.rollback();
-            }
-        }
-    }
-
-
     protected Product update(Product product) {
         Transaction tr = null;
         try (Session session = createSessionFactory().openSession()) {
@@ -74,6 +52,69 @@ public class ProductDAO {
             tr = session.getTransaction();
             tr.begin();
             session.delete(session.get(Product.class, id));
+            tr.commit();
+        } catch (HibernateException e) {
+            System.err.println("Save is failed");
+            System.err.println(e.getMessage());
+
+            if (tr != null) {
+                tr.rollback();
+            }
+        }
+    }
+
+    public void saveAll(List<Product> products){
+        Transaction tr = null;
+        try (Session session = createSessionFactory().openSession()) {
+            tr = session.getTransaction();
+            tr.begin();
+
+            for (Product product : products) {
+                session.save(product);
+            }
+
+            tr.commit();
+        } catch (HibernateException e) {
+            System.err.println("Save is failed");
+            System.err.println(e.getMessage());
+
+            if (tr != null) {
+                tr.rollback();
+            }
+        }
+    }
+
+    public void updateAll(List<Product> products){
+        Transaction tr = null;
+        try (Session session = createSessionFactory().openSession()) {
+            tr = session.getTransaction();
+            tr.begin();
+
+            for (Product product : products) {
+                session.update(product);
+            }
+
+            tr.commit();
+        } catch (HibernateException e) {
+            System.err.println("Save is failed");
+            System.err.println(e.getMessage());
+
+            if (tr != null) {
+                tr.rollback();
+            }
+        }
+    }
+
+    public void deleteAll(List<Product> products){
+        Transaction tr = null;
+        try (Session session = createSessionFactory().openSession()) {
+            tr = session.getTransaction();
+            tr.begin();
+
+            for (Product product : products) {
+                delete(product.getId());
+            }
+
             tr.commit();
         } catch (HibernateException e) {
             System.err.println("Save is failed");

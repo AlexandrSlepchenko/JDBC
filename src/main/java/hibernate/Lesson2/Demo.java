@@ -36,7 +36,7 @@ public class Demo {
         products.add(product3);
         products.add(product4);
 
-        productDAO.saveProducts(products);
+        productDAO.saveAll(products);
 
     }
 }
