@@ -1,11 +1,14 @@
-package hibernate.Lesson2.HW.HQL;
+package hibernate.Lesson2.HW.NativeSQL;
 
+import hibernate.Lesson2.HW.HQL.Product;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDAO {
@@ -24,9 +27,15 @@ public class ProductDAO {
     public List<Product> findByName(String name) {
 
         try (Session session = createSessionFactory().openSession()) {
+//            List products = new ArrayList<>();
+//
+//            products = session.createNativeQuery("SELECT * FROM PRDODUCTS WHERE name = :productName")
+//                    .setParameter("productName",name).list();
+//
+//            return products;
 
-            Query query = session.createQuery("FROM hibernate.Lesson2.HW.HQL.Product Product WHERE Product.name = :name");
-
+            NativeQuery query = session.createNativeQuery("SELECT * FROM PRODUCTS WHERE NAME = :name");
+            query.addEntity(Product.class);
             query.setParameter("name", name);
 
             return query.list();
@@ -42,8 +51,8 @@ public class ProductDAO {
 
         try (Session session = createSessionFactory().openSession()) {
 
-            Query query = session.createQuery("FROM hibernate.Lesson2.HW.HQL.Product Product WHERE Product.name LIKE :name");
-
+            NativeQuery query = session.createNativeQuery("SELECT * FROM PRODUCTS WHERE NAME LIKE :name");
+            query.addEntity(Product.class);
             query.setParameter("name", "%" + name + "%");
 
             return query.list();
@@ -58,8 +67,8 @@ public class ProductDAO {
 
         try (Session session = createSessionFactory().openSession()) {
 
-            Query query = session.createQuery("FROM hibernate.Lesson2.HW.HQL.Product Product WHERE Product.price BETWEEN :minPrice AND :maxPrice");
-
+            NativeQuery query = session.createNativeQuery("SELECT * FROM PRODUCTS WHERE PRICE BETWEEN :minPrice AND :maxPrice");
+            query.addEntity(Product.class);
             query.setParameter("minPrice", price-delta);
             query.setParameter("maxPrice", price+delta);
 
@@ -74,8 +83,8 @@ public class ProductDAO {
 
     public List<Product> findByNameSortedAsc(String name) {
         try (Session session = createSessionFactory().openSession()) {
-            Query query = session.createQuery("FROM hibernate.Lesson2.HW.HQL.Product Product WHERE Product.name = :name ORDER BY Product.name ASC");
-
+            NativeQuery query = session.createNativeQuery("SELECT * FROM PRODUCTS WHERE NAME = :name ORDER BY NAME ASC ");
+            query.addEntity(Product.class);
             query.setParameter("name", name);
 
             return query.list();
@@ -86,11 +95,10 @@ public class ProductDAO {
         return null;
     }
 
-    public List<Product> findByNameSortedDesc(String name) {
+    public List<Product> findByNameSortedDesc() {
         try (Session session = createSessionFactory().openSession()) {
-            Query query = session.createQuery("FROM hibernate.Lesson2.HW.HQL.Product Product WHERE Product.name = :name ORDER BY Product.name DESC");
-
-            query.setParameter("name", name);
+            NativeQuery query = session.createNativeQuery("SELECT * FROM PRODUCTS ORDER BY NAME DESC");
+            query.addEntity(Product.class);
 
             return query.list();
 
@@ -102,8 +110,9 @@ public class ProductDAO {
 
     public List<Product> findByPriceSortedDesc(int price, int delta) {
         try (Session session = createSessionFactory().openSession()) {
-            Query query = session.createQuery("FROM hibernate.Lesson2.HW.HQL.Product Product WHERE Product.price BETWEEN :minPrice AND :maxPrice ORDER BY Product.price DESC");
 
+            NativeQuery query = session.createNativeQuery("SELECT * FROM PRODUCTS WHERE PRICE BETWEEN :minPrice AND :maxPrice ORDER BY PRICE DESC");
+            query.addEntity(Product.class);
             query.setParameter("minPrice", price-delta);
             query.setParameter("maxPrice", price+delta);
 
