@@ -13,6 +13,10 @@
 
 <!--        <mapping class="hibernate.Lesson1.Product"></mapping>-->
         <mapping class="hibernate.Lesson2.HW.HQL.Product"></mapping>
+        <mapping class="hibernate.Lesson3.Model.Hotel"></mapping>
+        <mapping class="hibernate.Lesson3.Model.Room"></mapping>
+        <mapping class="hibernate.Lesson3.Model.User"></mapping>
+        <mapping class="hibernate.Lesson3.Model.Order"></mapping>
 
     </session-factory>
 </hibernate-configuration>
